@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Advertisements;
 
-public class GameControll : MonoBehaviour, IUnityAdsListener
+public class GameControll : MonoBehaviour//, IUnityAdsListener
 {
 
     [Header("General parameters")]
@@ -126,10 +126,10 @@ public class GameControll : MonoBehaviour, IUnityAdsListener
 
     private void Start()
     {
-        Advertisement.AddListener(this);
-        Advertisement.Initialize(gameId, testMode);
+       // Advertisement.AddListener(this);
+       // Advertisement.Initialize(gameId, testMode);
 
-        ShowAd();
+       // ShowAd();
 
 
         m_spawner.SpawnPictures(m_needPicturesCount);
@@ -677,7 +677,7 @@ public class GameControll : MonoBehaviour, IUnityAdsListener
        
         gameOverPanel.SetActive(true);
 
-        ShowAd();
+        //ShowAd();
     }
 
     public void GameWin()
@@ -890,53 +890,53 @@ public class GameControll : MonoBehaviour, IUnityAdsListener
     }
 
 
-    public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
-    {
-        // Define conditional logic for each ad completion status:
-        if (showResult == ShowResult.Finished)
-        {
-            // Reward the user for watching the ad to completion.
-        }
-        else if (showResult == ShowResult.Skipped)
-        {
-            // Do not reward the user for skipping the ad.
-        }
-        else if (showResult == ShowResult.Failed)
-        {
-            Debug.LogWarning("The ad did not finish due to an error.");
-        }
-    }
+   // public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
+   // {
+   //     // Define conditional logic for each ad completion status:
+   //     if (showResult == ShowResult.Finished)
+   //     {
+   //         // Reward the user for watching the ad to completion.
+   //     }
+   //     else if (showResult == ShowResult.Skipped)
+   //     {
+   //         // Do not reward the user for skipping the ad.
+   //     }
+   //     else if (showResult == ShowResult.Failed)
+   //     {
+   //         Debug.LogWarning("The ad did not finish due to an error.");
+   //     }
+   // }
 
-    public void ShowAd()
-    {
-        if (Advertisement.IsReady())
-        {
-            Advertisement.Show();
-        }
-    }
+   // public void ShowAd()
+   // {
+   //     if (Advertisement.IsReady())
+   //     {
+   //         Advertisement.Show();
+   //     }
+   // }
 
-    public void OnUnityAdsReady(string placementId)
-    {
-        if (showAdBool == true)
-        {
-            // If the ready Placement is rewarded, show the ad:
-            if (placementId == myPlacementId)
-            {
-                Advertisement.Show(myPlacementId);
-                showAdBool = false;
-            }
-        }
-    }
+   // public void OnUnityAdsReady(string placementId)
+   // {
+   //     if (showAdBool == true)
+   //     {
+   //         // If the ready Placement is rewarded, show the ad:
+   //         if (placementId == myPlacementId)
+   //         {
+   //             Advertisement.Show(myPlacementId);
+   //             showAdBool = false;
+   //         }
+   //     }
+   // }
 
 
-    public void OnUnityAdsDidError(string message)
-    {
-        // Log the error.
-    }
-
-    public void OnUnityAdsDidStart(string placementId)
-    {
-        // Optional actions to take when the end-users triggers an ad.
-    }
+   // public void OnUnityAdsDidError(string message)
+   // {
+   //     // Log the error.
+   // }
+   //
+   // public void OnUnityAdsDidStart(string placementId)
+   // {
+   //     // Optional actions to take when the end-users triggers an ad.
+   // }
 }
 
