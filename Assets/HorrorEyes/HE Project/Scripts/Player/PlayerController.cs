@@ -102,7 +102,8 @@ public class PlayerController : MonoBehaviour {
         characterController = GetComponent<CharacterController>();
         clampX = 0f;
         moveSpeed = walkSpeed;
-
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
     }
 

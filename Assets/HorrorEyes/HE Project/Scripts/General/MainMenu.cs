@@ -96,7 +96,7 @@ public class MainMenu : MonoBehaviour {
             m_XP = PlayerPrefs.GetInt("XP");
         }else
         {
-            m_XP = 0;
+            m_XP = 0    ;
         }
         m_xp_text.text = m_XP.ToString() + " XP";
 
