@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] float minPitch = -80f;
     [SerializeField] float maxPitch = 80f;
     [SerializeField] GameControll gameManager;
+    [SerializeField] PlayerController player;
 
 
     InputAction lookAction;
@@ -29,19 +30,14 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(gameManager.m_cutsceneEnded);
-        //if(gameManager.m_cutsceneEnded)
-        //{
-        //    Cursor.lockState = CursorLockMode.Locked;
-        //    Cursor.visible = false;
-        //}
+        if (!gameManager.pause && !player.lockedByDying)
+        {
+            rotation.x -= lookInput.y * sensitivity;
+            rotation.y += lookInput.x * sensitivity;
+            rotation.x = Mathf.Clamp(rotation.x, minPitch, maxPitch);
 
-
-        rotation.x -= lookInput.y * sensitivity;
-        rotation.y += lookInput.x * sensitivity;
-        rotation.x = Mathf.Clamp(rotation.x, minPitch, maxPitch);
-
-        transform.rotation = Quaternion.Euler(rotation);
+            transform.rotation = Quaternion.Euler(rotation);
+        }
     }
 
     void Look(InputAction.CallbackContext ctx)

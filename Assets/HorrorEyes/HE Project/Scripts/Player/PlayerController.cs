@@ -93,6 +93,9 @@ public class PlayerController : MonoBehaviour {
     [Header("Third Person Model Settings")]
     public Animator m_TPS_Player;
 
+    [Header("Added Settings")]
+    public Transform view; 
+
 
     private void Awake()
     {
@@ -115,8 +118,9 @@ public class PlayerController : MonoBehaviour {
             Movement();
             Controll();
             Stamina();
-   
-        }else
+            transform.rotation = Quaternion.Euler(0, view.eulerAngles.y, 0);
+        }
+        else
         {
             m_TPS_Player.SetFloat("DirectionY",0, 0.2f, Time.deltaTime);
             m_TPS_Player.SetFloat("DirectionX", 0, 0.2f, Time.deltaTime);
@@ -274,6 +278,8 @@ public class PlayerController : MonoBehaviour {
     {
         float inputX = CrossPlatformInputManager.GetAxis("Horizontal") * moveSpeed;
         float inputY = CrossPlatformInputManager.GetAxis("Vertical") * moveSpeed;
+
+
 
         Vector3 forvardMove = transform.forward * inputY;
         Vector3 sideMove = transform.right * inputX;

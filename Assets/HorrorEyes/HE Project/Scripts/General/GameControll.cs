@@ -18,7 +18,7 @@ public class GameControll : MonoBehaviour
     public ItemsSpawner m_spawner;
     [HideInInspector]
     public Inventory inventory;
-    private bool pause;
+    public bool pause { get; private set; }
     public string m_loadingSceneName;
     public string m_mainMenuSceneName;
     public List<DifficultyModes> m_difficultyModes = new List<DifficultyModes>();
@@ -656,7 +656,9 @@ public class GameControll : MonoBehaviour
                 pausePanel.SetActive(pause);
                 Time.timeScale = 0.0f;
                 player.locked = true;
-               }
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
 
             }
             else
@@ -666,7 +668,9 @@ public class GameControll : MonoBehaviour
                 pausePanel.SetActive(pause);
                 Time.timeScale = 1.0f;
                 player.locked = false;
-            
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+
             }
         
     }
