@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/HorrorEyes/HE Project/Scenes/School_Demo.unity
     guid: 0c4e67308727d1744bd490bb42d3cc90
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: ff80652ca7df766498ddba618bc4aabb,
+      type: 3}
+  m_UseUCBPForAssetBundles: 0

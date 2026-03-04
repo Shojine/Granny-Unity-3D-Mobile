@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour {
 
     [Header("XP Settings")]
     public Text m_xp_text;
-    private static int m_XP;
+    private static int m_XP = 10000;
 
     [Header("Level Settings")]
     public Text m_levelNameText;
@@ -120,7 +120,7 @@ public class MainMenu : MonoBehaviour {
         {
             sensitivitySlider.value = sensitivitySlider.maxValue / 2f;
         }
-
+        m_XP = 90000;
         GameSetup();
     }
 
