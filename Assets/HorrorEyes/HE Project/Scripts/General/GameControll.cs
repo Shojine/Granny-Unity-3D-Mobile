@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Advertisements;
 
-public class GameControll : MonoBehaviour//, IUnityAdsListener
+public class GameControll : MonoBehaviour
 {
 
     [Header("General parameters")]
@@ -126,11 +126,8 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
 
     private void Start()
     {
-       // Advertisement.AddListener(this);
-       // Advertisement.Initialize(gameId, testMode);
-
-       // ShowAd();
-
+        
+      
 
         m_spawner.SpawnPictures(m_needPicturesCount);
         m_spawner.SpawnPills();
@@ -674,10 +671,7 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
 
     public void GameOver()
     {
-       
-        gameOverPanel.SetActive(true);
-
-        //ShowAd();
+      
     }
 
     public void GameWin()
@@ -907,13 +901,6 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
    //     }
    // }
 
-   // public void ShowAd()
-   // {
-   //     if (Advertisement.IsReady())
-   //     {
-   //         Advertisement.Show();
-   //     }
-   // }
 
    // public void OnUnityAdsReady(string placementId)
    // {
