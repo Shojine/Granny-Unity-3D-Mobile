@@ -22039,6 +22039,7 @@ MonoBehaviour:
   sensitivity: 0.59
   minPitch: -80
   maxPitch: 80
+  gameManager: {fileID: 1191307063}
 --- !u!1 &1137640584
 GameObject:
   m_ObjectHideFlags: 0
@@ -38321,6 +38322,11 @@ PrefabInstance:
       propertyPath: 'm_enemyModes.Array.data[2].m_enemys.Array.data[1]'
       value: 
       objectReference: {fileID: 1298605742}
+    - target: {fileID: 2051022236876908679, guid: d33478b9a9701c94eae3d12e39df3607,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2518723641417871484, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: m_RootOrder
