@@ -85,10 +85,11 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
     public AudioClip[] m_printSound;
     public AudioClip m_printSpaceSound;
     float m_gameHadrnesMultip;
-    bool m_cutsceneEnded = false;
+    public bool m_cutsceneEnded { get; private set; } = false;
     int m_charID = 0;
     int m_charCount;
     bool m_cantPrint = false;
+
 
 
     string gameId = "3653578";
@@ -126,10 +127,6 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
 
     private void Start()
     {
-       // Advertisement.AddListener(this);
-       // Advertisement.Initialize(gameId, testMode);
-
-       // ShowAd();
 
 
         m_spawner.SpawnPictures(m_needPicturesCount);
@@ -336,8 +333,11 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
     {
         StopAllCoroutines();
         m_cutsceneEnded = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         m_cutsceneTextArea.text = m_cutsceneText;
         StartCoroutine(WaitCutscene());
+
     }
 
     public void SetEffect(PicturePaper.effectType effectType)
