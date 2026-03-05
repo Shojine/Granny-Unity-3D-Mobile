@@ -108,6 +108,7 @@ public class GameControll : MonoBehaviour
     private void Awake()
     {
         enemy.Clear();
+        //pauseVolume.SetActive(false);
         Enemy[] enm = FindObjectsOfType<Enemy>();
         enemy.AddRange(enm);
         player = FindObjectOfType<PlayerController>();
@@ -342,7 +343,6 @@ public class GameControll : MonoBehaviour
         Cursor.visible = false;
         m_cutsceneTextArea.text = m_cutsceneText;
         StartCoroutine(WaitCutscene());
-        gamePlayer.SetActive(true);
     }
 
     public void SetEffect(PicturePaper.effectType effectType)

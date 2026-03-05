@@ -12573,7 +12573,7 @@ MonoBehaviour:
   gameManager: {fileID: 1234953604}
   player: {fileID: 1527877463}
   hand: {fileID: 761927557}
-  acceleration: 4
+  acceleration: 3
   flashlightAcceleration: 5
   flashlightSound: {fileID: 0}
   flashlightFlicker: {fileID: 8300000, guid: d54d54dd300f73043a0ae7e9937fdbcb, type: 3}
@@ -38757,7 +38757,7 @@ PrefabInstance:
         type: 3}
       propertyPath: gamePlayer
       value: 
-      objectReference: {fileID: 612910254}
+      objectReference: {fileID: 0}
     - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: pauseVolume
