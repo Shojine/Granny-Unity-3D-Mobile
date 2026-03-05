@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour {
     public Animator m_TPS_Player;
 
     [Header("Added Settings")]
-    public Transform view; 
+    public Transform view;
 
 
     private void Awake()

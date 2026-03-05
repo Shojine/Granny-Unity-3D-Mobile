@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -13,8 +15,24 @@ public class CameraController : MonoBehaviour
     [SerializeField] Transform hand;
 
     [SerializeField] float acceleration;
-    [SerializeField] float flashlightAcceleration;
 
+    [Header("FlahlighSettings")]
+    [SerializeField] float flashlightAcceleration;
+    [SerializeField] AudioClip flashlightSound;
+    [SerializeField] AudioClip flashlightFlicker;
+    [SerializeField] AudioSource flashlightSoundSource;
+    [SerializeField] GameObject flashlightLightSource;
+    [SerializeField] int minFlickerCount;
+    [SerializeField] int maxFlickerCount;
+    [SerializeField] float flickerOnTime;
+    [SerializeField] float flickerOffTime;
+    [SerializeField] float maxFlickerInterval;
+    [Range(0f,10f)]
+    [SerializeField] int flickerSmoothing;
+
+
+
+    public bool accessability;
 
     InputAction lookAction;
     Vector2 lookInput;
@@ -24,9 +42,22 @@ public class CameraController : MonoBehaviour
     Vector3 rotation = Vector3.zero; // x = pitch, y = yaw
     Vector3 flashlightRotation = Vector2.zero; // x = pitch, y = yaw
 
+    //Flashlight Stuff
+    float maxIntensity;
+    float minIntensity = 0.0f;
+    float flickerTimer;
+    bool isFlickering;
+    Light flashlight;
+    Queue<float> smoothQueue;
+    float lastSum;
+
     void Start()
     {
-        
+        maxIntensity = flashlightLightSource.gameObject.GetComponent<Light>().intensity;
+        smoothQueue = new Queue<float>(flickerSmoothing);
+
+        flashlight = flashlightLightSource.GetComponent<Light>();
+
         lookAction = InputSystem.actions.FindAction("Look");
         lookAction.performed += Look;
         lookAction.canceled += Look;
@@ -37,6 +68,14 @@ public class CameraController : MonoBehaviour
 
         flashlightRotation.x = rotation.x;
         flashlightRotation.y = rotation.y;
+
+        if(accessability)
+        {
+            acceleration = 0;
+            flashlightAcceleration = 0;
+        }
+
+        RestartFlicker();
     }
 
     void Update()
@@ -50,33 +89,76 @@ public class CameraController : MonoBehaviour
             rotation.x = Mathf.Clamp(rotation.x, minPitch, maxPitch);
 
             transform.rotation = Quaternion.Euler(rotation);
-            flashlightVelocity = Vector2.Lerp(flashlightVelocity, lookInput, flashlightAcceleration * Time.deltaTime);
 
-            flashlightRotation.x -= flashlightVelocity.y * sensitivity;
-            flashlightRotation.y += flashlightVelocity.x * sensitivity;
-            flashlightRotation.x = Mathf.Clamp(flashlightRotation.x, minPitch, maxPitch);
-
-            if (Mathf.Abs(flashlightRotation.y - rotation.y) > 30f || Input.GetKey(KeyCode.R))
+            if(flashlightLightSource  != null)
             {
-                flashlightRotation.y = Mathf.Lerp(flashlightRotation.y, rotation.y, 0.1f);
-                flashlightRotation.x = Mathf.Lerp(flashlightRotation.x, rotation.x, 0.1f);
+                flashlightVelocity = Vector2.Lerp(flashlightVelocity, lookInput, flashlightAcceleration * Time.deltaTime);
+
+                flashlightRotation.x -= flashlightVelocity.y * sensitivity;
+                flashlightRotation.y += flashlightVelocity.x * sensitivity;
+                flashlightRotation.x = Mathf.Clamp(flashlightRotation.x, minPitch, maxPitch);
+
+                if (Mathf.Abs(flashlightRotation.y - rotation.y) > 30f || Input.GetKey(KeyCode.F))
+                {
+                    flashlightRotation.y = Mathf.Lerp(flashlightRotation.y, rotation.y, 0.1f);
+                    flashlightRotation.x = Mathf.Lerp(flashlightRotation.x, rotation.x, 0.1f);
+                }
+
+                hand.rotation = Quaternion.Euler(flashlightRotation);
+
+                if (!isFlickering)
+                {   
+                    flickerTimer -= Time.deltaTime;
+                    if(flickerTimer <= 0)
+                    {
+                        StartCoroutine(FlickerLight());
+                    }
+                }
             }
 
-            hand.rotation = Quaternion.Euler(flashlightRotation);
+            
         }
     }
 
 
-    //Vector3 CamUpdate(Vector3 rotation,Vector2 currentVelocity, float acceleration)
-    //{
-    //    currentVelocity = Vector2.Lerp(currentVelocity, lookInput, acceleration * Time.deltaTime);
+    void RestartFlicker()
+    {
+        flickerTimer = Random.Range(0.1f, maxFlickerInterval);
+        smoothQueue.Clear();
+        lastSum = 0;
+    }
 
-    //    rotation.x -= currentVelocity.y * sensitivity;
-    //    rotation.y += currentVelocity.x * sensitivity;
-    //    rotation.x = Mathf.Clamp(rotation.x, minPitch, maxPitch);
+    IEnumerator FlickerLight()
+    {
+        isFlickering = true;
+        flashlightSoundSource.PlayOneShot(flashlightFlicker);
 
-    //    return rotation;
-    //}
+        smoothQueue.Clear();
+        lastSum = 0f;
+
+        float elapsed = 0f;
+        float duration = Random.Range(flickerOnTime, flickerOffTime);
+
+        while (elapsed < duration)
+        {
+            while (smoothQueue.Count >= flickerSmoothing)
+                lastSum -= smoothQueue.Dequeue();
+
+            float newVal = Random.Range(minIntensity, maxIntensity);
+            smoothQueue.Enqueue(newVal);
+            lastSum += newVal;
+            flashlight.intensity = lastSum / smoothQueue.Count;
+
+            elapsed += Time.deltaTime;
+            yield return null; // wait one frame
+        }
+
+        bool staysOff = Random.value > 0.7f;
+        if (staysOff) flashlightLightSource.SetActive(false);
+
+        isFlickering = false;
+        RestartFlicker();
+    }
 
     void Look(InputAction.CallbackContext ctx)
     {
