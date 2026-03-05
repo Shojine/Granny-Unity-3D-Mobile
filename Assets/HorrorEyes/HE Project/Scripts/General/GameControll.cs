@@ -677,13 +677,16 @@ public class GameControll : MonoBehaviour
 
     public void GameOver()
     {
-      
+        gameOverPanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void GameWin()
     {
 
-        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         gameControllPanel.SetActive(false);
         gameWinPanel.SetActive(true);
         player.locked = true;
