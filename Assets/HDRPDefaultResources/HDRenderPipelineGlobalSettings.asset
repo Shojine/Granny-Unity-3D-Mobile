@@ -980,7 +980,8 @@ MonoBehaviour:
         asm: Unity.RenderPipelines.HighDefinition.Runtime}
       data:
         m_Version: 0
-        m_VolumeProfile: {fileID: 0}
+        m_VolumeProfile: {fileID: 11400000, guid: 45f51505499ef5d458f5725c60c7cd61,
+          type: 2}
     - rid: 4022466649314296066
       type: {class: HDRenderPipelineEditorMaterials, ns: UnityEngine.Rendering.HighDefinition,
         asm: Unity.RenderPipelines.HighDefinition.Runtime}

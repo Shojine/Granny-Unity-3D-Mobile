@@ -10,11 +10,19 @@ public class CameraController : MonoBehaviour
     [SerializeField] float maxPitch = 80f;
     [SerializeField] GameControll gameManager;
     [SerializeField] PlayerController player;
+    [SerializeField] Transform hand;
+
+    [SerializeField] float acceleration;
+    [SerializeField] float flashlightAcceleration;
 
 
     InputAction lookAction;
     Vector2 lookInput;
+    Vector2 currentVelocity;
+    Vector2 flashlightVelocity;
+
     Vector3 rotation = Vector3.zero; // x = pitch, y = yaw
+    Vector3 flashlightRotation = Vector2.zero; // x = pitch, y = yaw
 
     void Start()
     {
@@ -26,19 +34,49 @@ public class CameraController : MonoBehaviour
         // Initialize rotation from current transform
         rotation.x = transform.eulerAngles.x;
         rotation.y = transform.eulerAngles.y;
+
+        flashlightRotation.x = rotation.x;
+        flashlightRotation.y = rotation.y;
     }
 
     void Update()
     {
         if (!gameManager.pause && !player.lockedByDying)
         {
-            rotation.x -= lookInput.y * sensitivity;
-            rotation.y += lookInput.x * sensitivity;
+            currentVelocity = Vector2.Lerp(currentVelocity, lookInput, acceleration * Time.deltaTime);
+
+            rotation.x -= currentVelocity.y * sensitivity;
+            rotation.y += currentVelocity.x * sensitivity;
             rotation.x = Mathf.Clamp(rotation.x, minPitch, maxPitch);
 
             transform.rotation = Quaternion.Euler(rotation);
+            flashlightVelocity = Vector2.Lerp(flashlightVelocity, lookInput, flashlightAcceleration * Time.deltaTime);
+
+            flashlightRotation.x -= flashlightVelocity.y * sensitivity;
+            flashlightRotation.y += flashlightVelocity.x * sensitivity;
+            flashlightRotation.x = Mathf.Clamp(flashlightRotation.x, minPitch, maxPitch);
+
+            if (Mathf.Abs(flashlightRotation.y - rotation.y) > 30f || Input.GetKey(KeyCode.R))
+            {
+                flashlightRotation.y = Mathf.Lerp(flashlightRotation.y, rotation.y, 0.1f);
+                flashlightRotation.x = Mathf.Lerp(flashlightRotation.x, rotation.x, 0.1f);
+            }
+
+            hand.rotation = Quaternion.Euler(flashlightRotation);
         }
     }
+
+
+    //Vector3 CamUpdate(Vector3 rotation,Vector2 currentVelocity, float acceleration)
+    //{
+    //    currentVelocity = Vector2.Lerp(currentVelocity, lookInput, acceleration * Time.deltaTime);
+
+    //    rotation.x -= currentVelocity.y * sensitivity;
+    //    rotation.y += currentVelocity.x * sensitivity;
+    //    rotation.x = Mathf.Clamp(rotation.x, minPitch, maxPitch);
+
+    //    return rotation;
+    //}
 
     void Look(InputAction.CallbackContext ctx)
     {
