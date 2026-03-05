@@ -92,6 +92,11 @@ public class GameControll : MonoBehaviour
     bool m_cantPrint = false;
 
 
+    [Header("Added Settings")]
+    public GameObject pauseVolume;
+
+
+
 
     string gameId = "3653578";
     string myPlacementId = "video";
@@ -659,19 +664,20 @@ public class GameControll : MonoBehaviour
                 player.locked = true;
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                pauseVolume.SetActive(true);
             }
 
             }
             else
             {
-            
+                
                 pause = false;
                 pausePanel.SetActive(pause);
                 Time.timeScale = 1.0f;
                 player.locked = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
-
+                pauseVolume.SetActive(false);
             }
         
     }
