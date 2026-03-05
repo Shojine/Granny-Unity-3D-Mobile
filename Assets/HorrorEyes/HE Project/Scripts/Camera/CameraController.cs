@@ -24,8 +24,6 @@ public class CameraController : MonoBehaviour
     [SerializeField] GameObject flashlightLightSource;
     [SerializeField] int minFlickerCount;
     [SerializeField] int maxFlickerCount;
-    [SerializeField] float flickerOnTime;
-    [SerializeField] float flickerOffTime;
     [SerializeField] float maxFlickerInterval;
     [Range(0f,10f)]
     [SerializeField] int flickerSmoothing;
@@ -106,7 +104,7 @@ public class CameraController : MonoBehaviour
 
                 hand.rotation = Quaternion.Euler(flashlightRotation);
 
-                if (!isFlickering)
+                if (!isFlickering  && flashlightLightSource.active == true)
                 {   
                     flickerTimer -= Time.deltaTime;
                     if(flickerTimer <= 0)
@@ -115,8 +113,6 @@ public class CameraController : MonoBehaviour
                     }
                 }
             }
-
-            
         }
     }
 
@@ -137,7 +133,7 @@ public class CameraController : MonoBehaviour
         lastSum = 0f;
 
         float elapsed = 0f;
-        float duration = Random.Range(flickerOnTime, flickerOffTime);
+        float duration = flashlightFlicker.length;
 
         while (elapsed < duration)
         {
@@ -157,6 +153,7 @@ public class CameraController : MonoBehaviour
         if (staysOff) flashlightLightSource.SetActive(false);
 
         isFlickering = false;
+  
         RestartFlicker();
     }
 

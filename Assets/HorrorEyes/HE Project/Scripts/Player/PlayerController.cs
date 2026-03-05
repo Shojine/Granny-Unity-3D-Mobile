@@ -95,7 +95,9 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Added Settings")]
     public Transform view;
-
+    public AudioClip flashlightAudio;
+    public AudioSource flashlightSource;
+    public GameObject flashlight;
 
     private void Awake()
     {
@@ -119,6 +121,18 @@ public class PlayerController : MonoBehaviour {
             Controll();
             Stamina();
             transform.rotation = Quaternion.Euler(0, view.eulerAngles.y, 0);
+
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                flashlightSource.PlayOneShot(flashlightAudio);
+                if (flashlight.active == false)
+                {
+                    flashlight.SetActive(true);
+                }else
+                {
+                    flashlight.SetActive(false);
+                }
+            }
         }
         else
         {

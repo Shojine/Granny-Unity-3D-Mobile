@@ -18,6 +18,7 @@ public class GameControll : MonoBehaviour
     public ItemsSpawner m_spawner;
     [HideInInspector]
     public Inventory inventory;
+    public GameObject gamePlayer;
     public bool pause { get; private set; }
     public string m_loadingSceneName;
     public string m_mainMenuSceneName;
@@ -336,7 +337,7 @@ public class GameControll : MonoBehaviour
         Cursor.visible = false;
         m_cutsceneTextArea.text = m_cutsceneText;
         StartCoroutine(WaitCutscene());
-
+        gamePlayer.SetActive(true);
     }
 
     public void SetEffect(PicturePaper.effectType effectType)
