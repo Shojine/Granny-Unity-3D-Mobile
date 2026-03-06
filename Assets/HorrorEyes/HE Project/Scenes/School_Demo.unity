@@ -11097,7 +11097,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1083282277958727438, guid: 3214a3384c47ec144ba64253eff1af6e,
         type: 3}
+      propertyPath: far clip plane
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083282277958727438, guid: 3214a3384c47ec144ba64253eff1af6e,
+        type: 3}
       propertyPath: m_TargetDisplay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083282277958727438, guid: 3214a3384c47ec144ba64253eff1af6e,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1083282277958727438, guid: 3214a3384c47ec144ba64253eff1af6e,
+        type: 3}
+      propertyPath: m_AllowDynamicResolution
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1083282277966315211, guid: 3214a3384c47ec144ba64253eff1af6e,
@@ -12569,9 +12584,9 @@ MonoBehaviour:
   clearDepth: 1
   volumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4294967295
   volumeAnchorOverride: {fileID: 0}
-  antialiasing: 0
+  antialiasing: 2
   SMAAQuality: 2
   dithering: 0
   stopNaNs: 0
@@ -12597,7 +12612,7 @@ MonoBehaviour:
   flipYMode: 0
   xrRendering: 1
   fullscreenPassthrough: 0
-  allowDynamicResolution: 0
+  allowDynamicResolution: 1
   customRenderingSettings: 0
   invertFaceCulling: 0
   probeLayerMask:
@@ -12719,7 +12734,7 @@ MonoBehaviour:
   maxFlickerCount: 7
   maxFlickerInterval: 10
   flickerSmoothing: 5
-  accessability: 0
+  accessability: 1
 --- !u!114 &477221617
 MonoBehaviour:
   m_ObjectHideFlags: 0

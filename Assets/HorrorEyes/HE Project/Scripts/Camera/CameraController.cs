@@ -49,6 +49,8 @@ public class CameraController : MonoBehaviour
     Queue<float> smoothQueue;
     float lastSum;
 
+    float tempAcceleration;
+    float tempFlashlightAcceleration;
     void Start()
     {
         maxIntensity = flashlightLightSource.gameObject.GetComponent<Light>().intensity;
@@ -69,8 +71,10 @@ public class CameraController : MonoBehaviour
 
         if(accessability)
         {
-            acceleration = 0;
-            flashlightAcceleration = 0;
+            tempAcceleration = acceleration;
+            tempFlashlightAcceleration = flashlightAcceleration;
+            acceleration = 10;
+            flashlightAcceleration = 10;
         }
 
         RestartFlicker();
@@ -78,6 +82,15 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (accessability)
+        {
+            acceleration = 10;
+            flashlightAcceleration = 10;
+        }else
+        {
+            acceleration = tempAcceleration;
+            flashlightAcceleration = tempFlashlightAcceleration;
+        }
         if (!gameManager.pause && !player.lockedByDying)
         {
             currentVelocity = Vector2.Lerp(currentVelocity, lookInput, acceleration * Time.deltaTime);
