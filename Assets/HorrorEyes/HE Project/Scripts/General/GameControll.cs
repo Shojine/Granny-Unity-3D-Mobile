@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Advertisements;
 
-public class GameControll : MonoBehaviour//, IUnityAdsListener
+public class GameControll : MonoBehaviour
 {
 
     [Header("General parameters")]
@@ -18,7 +18,7 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
     public ItemsSpawner m_spawner;
     [HideInInspector]
     public Inventory inventory;
-    private bool pause;
+    public bool pause { get; private set; }
     public string m_loadingSceneName;
     public string m_mainMenuSceneName;
     public List<DifficultyModes> m_difficultyModes = new List<DifficultyModes>();
@@ -85,10 +85,11 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
     public AudioClip[] m_printSound;
     public AudioClip m_printSpaceSound;
     float m_gameHadrnesMultip;
-    bool m_cutsceneEnded = false;
+    public bool m_cutsceneEnded { get; private set; } = false;
     int m_charID = 0;
     int m_charCount;
     bool m_cantPrint = false;
+
 
 
     string gameId = "3653578";
@@ -126,11 +127,6 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
 
     private void Start()
     {
-       // Advertisement.AddListener(this);
-       // Advertisement.Initialize(gameId, testMode);
-
-       // ShowAd();
-
 
         m_spawner.SpawnPictures(m_needPicturesCount);
         m_spawner.SpawnPills();
@@ -336,8 +332,11 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
     {
         StopAllCoroutines();
         m_cutsceneEnded = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         m_cutsceneTextArea.text = m_cutsceneText;
         StartCoroutine(WaitCutscene());
+
     }
 
     public void SetEffect(PicturePaper.effectType effectType)
@@ -657,7 +656,9 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
                 pausePanel.SetActive(pause);
                 Time.timeScale = 0.0f;
                 player.locked = true;
-               }
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
 
             }
             else
@@ -667,17 +668,16 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
                 pausePanel.SetActive(pause);
                 Time.timeScale = 1.0f;
                 player.locked = false;
-            
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+
             }
         
     }
 
     public void GameOver()
     {
-       
-        gameOverPanel.SetActive(true);
-
-        //ShowAd();
+      
     }
 
     public void GameWin()
@@ -907,13 +907,6 @@ public class GameControll : MonoBehaviour//, IUnityAdsListener
    //     }
    // }
 
-   // public void ShowAd()
-   // {
-   //     if (Advertisement.IsReady())
-   //     {
-   //         Advertisement.Show();
-   //     }
-   // }
 
    // public void OnUnityAdsReady(string placementId)
    // {
