@@ -51,10 +51,14 @@ public class CameraController : MonoBehaviour
 
     float tempAcceleration;
     float tempFlashlightAcceleration;
+
+    float handOffset;
     void Start()
     {
         maxIntensity = flashlightLightSource.gameObject.GetComponent<Light>().intensity;
         smoothQueue = new Queue<float>(flickerSmoothing);
+
+        handOffset = hand.position.y - transform.position.y;
 
         flashlight = flashlightLightSource.GetComponent<Light>();
 
@@ -125,6 +129,8 @@ public class CameraController : MonoBehaviour
                         StartCoroutine(FlickerLight());
                     }
                 }
+                var offset = transform.position.y - hand.position.y;
+                hand.position = new Vector3(hand.position.x, transform.position.y + handOffset , hand.position.z);
             }
         }
     }
