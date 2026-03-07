@@ -38751,12 +38751,12 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1527877463}
     - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: gamePlayer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1668611060}
     - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: pauseVolume
@@ -38770,7 +38770,7 @@ PrefabInstance:
     - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: m_mobileTouchInput
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
@@ -57540,7 +57540,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1083282278162292185}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1668611060}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3d5ae956a928a84587b61162e082522, type: 3}
@@ -63705,6 +63705,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666779003}
   m_Mesh: {fileID: 4300024, guid: cf7f211d162131445aba64d6d5b9277f, type: 3}
+--- !u!1 &1668611060 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1083282279372770071, guid: 3214a3384c47ec144ba64253eff1af6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1083282278162292185}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1668670611
 GameObject:
   m_ObjectHideFlags: 0
@@ -72747,7 +72753,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7950b1f179803418928395f530650d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interact
-  m_gameController: {fileID: 0}
   rayDistance: 0
   interactLayers:
     serializedVersion: 2
