@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour {
         characterController = GetComponent<CharacterController>();
         clampX = 0f;
         moveSpeed = walkSpeed;
-
+        locked = false;
 
     }
 
@@ -132,6 +132,11 @@ public class PlayerController : MonoBehaviour {
                 {
                     flashlight.SetActive(false);
                 }
+            }
+
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                gameControll.SetEnemyEyes();
             }
         }
         else

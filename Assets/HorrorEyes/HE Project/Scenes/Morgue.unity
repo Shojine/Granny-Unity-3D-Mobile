@@ -12583,7 +12583,7 @@ MonoBehaviour:
   maxFlickerCount: 7
   maxFlickerInterval: 10
   flickerSmoothing: 5
-  accessability: 0
+  accessability: 1
 --- !u!82 &329970354
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13452,6 +13452,11 @@ PrefabInstance:
       value: Interact_Refrigerator (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5098744532976828302, guid: b7b74fd24f7dc11478802f0db345a901,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099698665549181658, guid: b7b74fd24f7dc11478802f0db345a901,
         type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -26813,18 +26818,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735024872}
   m_Mesh: {fileID: 4300032, guid: cf7f211d162131445aba64d6d5b9277f, type: 3}
---- !u!114 &739038937 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 76213904291193160, guid: d33478b9a9701c94eae3d12e39df3607,
-    type: 3}
-  m_PrefabInstance: {fileID: 1055599618}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbd5b955da5866848967b3d9434894ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &740358907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30391,6 +30384,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825657931}
   m_Mesh: {fileID: 4300032, guid: cf7f211d162131445aba64d6d5b9277f, type: 3}
+--- !u!4 &827829035 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1083282278373764680, guid: 3214a3384c47ec144ba64253eff1af6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1083282278162292185}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &831344492
 GameObject:
   m_ObjectHideFlags: 0
@@ -38922,12 +38921,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 739038937}
+      objectReference: {fileID: 0}
     - target: {fileID: 3076952125410260624, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 739038937}
+      objectReference: {fileID: 0}
     - target: {fileID: 3128214005525813414, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: m_Color.a
@@ -72736,6 +72735,30 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
+--- !u!114 &1867279260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867279255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e7950b1f179803418928395f530650d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interact
+  m_gameController: {fileID: 0}
+  rayDistance: 0
+  interactLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  interactTag: 
+  m_examineTransform: {fileID: 827829035}
+  m_paperScreenTransform: {fileID: 0}
+  m_itemScreenTransform: {fileID: 0}
+  m_moveSpeed: 0
+  m_paperShowTime: 0
+  m_itemShowTime: 0
 --- !u!1 &1868343457
 GameObject:
   m_ObjectHideFlags: 0
@@ -88198,6 +88221,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1867279257}
+    - targetCorrespondingSourceObject: {fileID: 1083282277958727436, guid: 3214a3384c47ec144ba64253eff1af6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1867279260}
     - targetCorrespondingSourceObject: {fileID: 1083282277920545668, guid: 3214a3384c47ec144ba64253eff1af6e,
         type: 3}
       insertIndex: -1

@@ -12,7 +12,6 @@ public class GameControll : MonoBehaviour
     [Header("General parameters")]
     [Tooltip("Player controller script here")]
     public bool m_mobileTouchInput;
-    [HideInInspector]
     public PlayerController player;
     [HideInInspector]
     public ItemsSpawner m_spawner;
@@ -616,6 +615,8 @@ public class GameControll : MonoBehaviour
                 player.cameraTransform.gameObject.SetActive(false);
                 int eID = GetNearestEnemy();
                 enemy[eID].m_enemyHeadCamera.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
         }else
         {
@@ -629,7 +630,9 @@ public class GameControll : MonoBehaviour
             {
                 enemy[i].m_enemyHeadCamera.SetActive(false);
             }
-           
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
         }
     }
 

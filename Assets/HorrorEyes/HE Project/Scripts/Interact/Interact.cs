@@ -8,8 +8,6 @@ public class Interact : MonoBehaviour {
 
 
     [Header("Interact Settings")]
-    [HideInInspector]
-    public GameControll m_gameController;
     [Tooltip("Distance of ray to interact")]
     public float rayDistance;
     [Tooltip("Layers to interact (default as obstacle)")]
@@ -33,42 +31,18 @@ public class Interact : MonoBehaviour {
     Item m_item;
     int m_readState;
     int m_itemTakeState;
-
+    private GameControll m_gameController;
 
     private void Start()
     {
-        m_gameController = FindObjectOfType<GameControll>();
-        player = m_gameController.player;
+        m_gameController = FindFirstObjectByType<GameControll>();
+        player = m_gameController.player.GetComponent<PlayerController>();
     }
 
     private void Update()
     {
-        if (!player.locked)
+        if (player != null && !player.locked)
         {
-            if (m_gameController.m_mobileTouchInput)
-            {
-
-                for (var i = 0; i < Input.touchCount; ++i)
-                {                  
-                    if (Input.GetTouch(i).phase == TouchPhase.Began)
-                    {
-                        if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
-                        {
-                            RaycastHit hot;
-                            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
-                            if (Physics.Raycast(ray, out hot, rayDistance, interactLayers))
-                            {
-                                if (hot.transform.gameObject.tag == interactTag)
-                                {
-                                    CheckRaycastedObject(hot.transform.gameObject, -1);
-                                }
-                            }
-                        }
-
-                    }
-                }
-
-            }
 
             if (!m_gameController.m_mobileTouchInput)
             {
