@@ -801,7 +801,7 @@ public class GameControll : MonoBehaviour
         {
             PlayerPrefs.SetInt("ReturnFromGame", 1);
             PlayerPrefs.SetString("GameLevel", m_mainMenuSceneName);
-            SceneManager.LoadScene(m_loadingSceneName);
+            StartCoroutine(FadeThenLoad()); // ← fade first, then load
         }
 
         if(type == 1) //// Game Over
@@ -828,6 +828,14 @@ public class GameControll : MonoBehaviour
             PlayerPrefs.SetString("GameLevel", m_mainMenuSceneName);
             SceneManager.LoadScene(m_loadingSceneName);
         }
+    }
+
+    private IEnumerator FadeThenLoad()
+    {
+        Time.timeScale = 1.0f; // ← reset timescale first
+        fadeScreen.Play(fadeInAnimName);
+        yield return new WaitForSecondsRealtime(fadeScreen[fadeInAnimName].length);
+        SceneManager.LoadScene(m_loadingSceneName);
     }
 
     public void ScreenFade(int state)
