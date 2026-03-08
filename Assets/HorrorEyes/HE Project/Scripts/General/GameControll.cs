@@ -799,6 +799,7 @@ public class GameControll : MonoBehaviour
     {
         if (type == 0)
         {
+            PlayerPrefs.SetInt("ReturnFromGame", 1);
             PlayerPrefs.SetString("GameLevel", m_mainMenuSceneName);
             SceneManager.LoadScene(m_loadingSceneName);
         }

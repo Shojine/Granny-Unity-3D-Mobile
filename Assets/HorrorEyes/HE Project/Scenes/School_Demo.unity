@@ -11224,6 +11224,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.y
       value: 0.035429314
       objectReference: {fileID: 0}
+    - target: {fileID: 1083282277958727436, guid: 3214a3384c47ec144ba64253eff1af6e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1083282277958727438, guid: 3214a3384c47ec144ba64253eff1af6e,
         type: 3}
       propertyPath: far clip plane
@@ -12154,6 +12159,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.00000027380887
       objectReference: {fileID: 0}
+    - target: {fileID: 1083282279553371527, guid: 3214a3384c47ec144ba64253eff1af6e,
+        type: 3}
+      propertyPath: m_examine_camera
+      value: 
+      objectReference: {fileID: 477221611}
     - target: {fileID: 1083282279553371527, guid: 3214a3384c47ec144ba64253eff1af6e,
         type: 3}
       propertyPath: m_gameController
