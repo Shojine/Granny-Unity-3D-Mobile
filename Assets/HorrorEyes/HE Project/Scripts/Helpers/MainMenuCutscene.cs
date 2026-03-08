@@ -6,6 +6,8 @@ public class MainMenuCutscene : MonoBehaviour
 {
 
     public Animation[] m_pictures;
+    public AudioSource m_audioSource;
+    public AudioClip[] m_audioClips;
     public string m_flyAnim;
     public string m_idleAnim;
     public float m_flyTime;
@@ -19,6 +21,7 @@ public class MainMenuCutscene : MonoBehaviour
             m_playing = true;
             m_pictures[m_pictureID].Play(m_flyAnim);
             StartCoroutine(WaitForPictureFly());
+            m_audioSource.PlayOneShot(m_audioClips[m_pictureID]);
         }
     }
 

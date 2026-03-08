@@ -73,14 +73,8 @@ public class CameraController : MonoBehaviour
         flashlightRotation.x = rotation.x;
         flashlightRotation.y = rotation.y;
 
-        if(accessability)
-        {
-            tempAcceleration = acceleration;
-            tempFlashlightAcceleration = flashlightAcceleration;
-            acceleration = 10;
-            flashlightAcceleration = 10;
-        }
-
+        tempAcceleration = acceleration;
+        tempFlashlightAcceleration = flashlightAcceleration;
         RestartFlicker();
     }
 

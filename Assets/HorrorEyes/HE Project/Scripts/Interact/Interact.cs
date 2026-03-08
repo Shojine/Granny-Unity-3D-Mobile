@@ -33,6 +33,9 @@ public class Interact : MonoBehaviour {
     int m_itemTakeState;
     private GameControll m_gameController;
 
+    [Header("Examine Settings")]
+    public GameObject m_examine_camera;
+
     private void Start()
     {
         m_gameController = FindFirstObjectByType<GameControll>();
@@ -81,6 +84,7 @@ public class Interact : MonoBehaviour {
         {
             if(m_readState == 0)
             {
+                m_examine_camera.SetActive(true);
                 m_paper.transform.position = Vector3.Slerp(m_paper.transform.position, m_examineTransform.position, m_moveSpeed * Time.deltaTime);
                 m_paper.transform.rotation = Quaternion.Slerp(m_paper.transform.rotation, m_examineTransform.rotation, m_moveSpeed * Time.deltaTime);
                 float dist = Vector3.Distance(m_paper.transform.position, m_examineTransform.position);
@@ -111,6 +115,7 @@ public class Interact : MonoBehaviour {
                     m_gameController.m_nextPicture = m_paper.m_pictureIconUI;
                     m_readState = 0;
                     m_readPaper = false;
+                    m_examine_camera.SetActive(false);
                     Destroy(m_paper.gameObject);
                     m_paper = null;                
                     m_gameController.AddPaperPicture();
@@ -125,6 +130,7 @@ public class Interact : MonoBehaviour {
         {
             if (m_itemTakeState == 0)
             {
+                m_examine_camera.SetActive(true);
                 m_item.transform.position = Vector3.Slerp(m_item.transform.position, m_examineTransform.position, m_moveSpeed * Time.deltaTime);
                 m_item.transform.rotation = Quaternion.Slerp(m_item.transform.rotation, m_examineTransform.rotation, m_moveSpeed * Time.deltaTime);
                 float dist = Vector3.Distance(m_item.transform.position, m_examineTransform.position);
@@ -155,7 +161,8 @@ public class Interact : MonoBehaviour {
                     m_gameController.inventory.AddItem(m_item.itemID, m_item.itemCount);
                     m_takeItem = false;
                     Destroy(m_item.gameObject);
-                    m_item = null;                 
+                    m_item = null;
+                    m_examine_camera.SetActive(false);
                 }
             }
         }
