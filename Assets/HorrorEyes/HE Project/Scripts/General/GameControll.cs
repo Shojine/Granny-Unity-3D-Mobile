@@ -799,7 +799,6 @@ public class GameControll : MonoBehaviour
     {
         if (type == 0)
         {
-            PlayerPrefs.SetInt("ReturnFromGame", 1);
             PlayerPrefs.SetString("GameLevel", m_mainMenuSceneName);
             StartCoroutine(FadeThenLoad()); // ← fade first, then load
         }
