@@ -6540,6 +6540,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281953942}
   m_Mesh: {fileID: -6264831526926562434, guid: cf074a558caf8874480ad4131e1b761f, type: 3}
+--- !u!114 &283417988 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1644165989342418673, guid: d33478b9a9701c94eae3d12e39df3607,
+    type: 3}
+  m_PrefabInstance: {fileID: 1898811557}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &284520625
 GameObject:
   m_ObjectHideFlags: 0
@@ -16358,6 +16370,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 620338251}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &623055899 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7215798570365711555, guid: d33478b9a9701c94eae3d12e39df3607,
+    type: 3}
+  m_PrefabInstance: {fileID: 1898811557}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &628759862
 GameObject:
   m_ObjectHideFlags: 0
@@ -42303,6 +42327,11 @@ PrefabInstance:
       objectReference: {fileID: 258595860}
     - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
+      propertyPath: volumeSlider
+      value: 
+      objectReference: {fileID: 623055899}
+    - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
+        type: 3}
       propertyPath: m_cutsceneText
       value: 'This is a demo level of school. In this level i am using baked lights. '
       objectReference: {fileID: 0}
@@ -42311,6 +42340,11 @@ PrefabInstance:
       propertyPath: enemy.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
+        type: 3}
+      propertyPath: sensitivitySlider
+      value: 
+      objectReference: {fileID: 283417988}
     - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: 'm_enemyModes.Array.data[0].m_enemys.Array.data[0]'
