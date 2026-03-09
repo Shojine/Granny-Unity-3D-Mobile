@@ -1304,15 +1304,17 @@ MonoBehaviour:
   m_levels:
   - name: Morgue
     m_sceneName: Morgue
-    m_description: Old abandoned hospital with morgue
+    m_description: An abandoned hospital where the dead were never truly laid to
+      rest. The morgue still has occupants,  just not the kind that stay still.
     m_levelShowGameobject: {fileID: 1040403949}
     m_lockByDefault: 0
     m_lockState: 0
     m_price: 0
-  - name: School (demo)
+  - name: School
     m_sceneName: School_Demo
-    m_description: Demo level of school. You can replace it or make a big school
-      level!
+    m_description: The classrooms have been empty for years. But late at night, if
+      you listen closely, you can still hear them, small footsteps, distant laughter,
+      and something that sounds as if the past still lingers.
     m_levelShowGameobject: {fileID: 8724423987122817380}
     m_lockByDefault: 1
     m_lockState: 0
@@ -1321,7 +1323,7 @@ MonoBehaviour:
   - name: Dead Woman
     m_enemyModeId: 0
     m_description: The corpse of a woman who has risen from the dead and now wanders
-      in search of the living in order to subdue his hunger!
+      in search of the living in order to subdue her hunger!
     m_enemyShowGameobject:
     - {fileID: 1931747297}
     m_lockByDefault: 0
@@ -1329,16 +1331,17 @@ MonoBehaviour:
     m_price: 0
   - name: Cannibal
     m_enemyModeId: 1
-    m_description: "\rA disgusting creature that apparently was once a patient in
-      a hospital, but now it devours corpses and everyone it meets on its way!"
+    m_description: Starvation and madness have stripped away everything it once was.
+      Now it stalks the corridors , drawn by the smell of the living, driven by a
+      hunger that no amount of flesh can satisfy.
     m_enemyShowGameobject:
     - {fileID: 446931274}
     m_lockByDefault: 1
     m_lockState: 0
     m_price: 1000
-  - name: Double horror
+  - name: Dueling Dread
     m_enemyModeId: 2
-    m_description: "\rTwo monsters, one way out!"
+    m_description: "\rOne way out. Two reasons to run..."
     m_enemyShowGameobject:
     - {fileID: 1931747297}
     - {fileID: 446931274}
@@ -1358,7 +1361,7 @@ MonoBehaviour:
       - XP: * 0.5'
   - name: Normal
     m_difficultId: 1
-    m_description: '- Enemy Speed: Midle
+    m_description: '- Enemy Speed: Middle
 
       - Enemy See Distance: 20
 
@@ -8320,7 +8323,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 9c6637399085c58498b987e0c32f0c35, type: 3}
-    m_FontSize: 25
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -9903,7 +9906,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 9c6637399085c58498b987e0c32f0c35, type: 3}
-    m_FontSize: 25
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -10413,7 +10416,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 9c6637399085c58498b987e0c32f0c35, type: 3}
-    m_FontSize: 25
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
