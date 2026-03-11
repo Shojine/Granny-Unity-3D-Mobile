@@ -90,13 +90,9 @@ public class GameControll : MonoBehaviour
     int m_charCount;
     bool m_cantPrint = false;
 
-
     [Header("Added Settings")]
     public GameObject pauseVolume;
     public CameraController cam;
-
-
-
 
     string gameId = "3653578";
     string myPlacementId = "video";
@@ -113,7 +109,7 @@ public class GameControll : MonoBehaviour
         enemy.AddRange(enm);
         player = FindObjectOfType<PlayerController>();
         m_videcams = FindObjectsOfType<Videcam>();
-        m_spawner = GetComponent<ItemsSpawner>();    
+        m_spawner = GetComponent<ItemsSpawner>();
         inventory = GetComponent<Inventory>();
         m_charCount = m_cutsceneText.Length;
         m_cutscenePanel.SetActive(true);
@@ -129,7 +125,6 @@ public class GameControll : MonoBehaviour
         }
         enemy.Clear();
         PrepareGame();
-
     }
 
     private void Start()
@@ -184,7 +179,8 @@ public class GameControll : MonoBehaviour
            
             }else
             {
-                Debug.Log("Wrond enemy mode id, cant find mode in Enemy Modes list");
+                enemy.AddRange(m_enemyModes[0].m_enemys);// 1 is default mode
+                //Debug.Log("Wrond enemy mode id, cant find mode in Enemy Modes list");
             }
             
         }else
@@ -200,7 +196,8 @@ public class GameControll : MonoBehaviour
             }
             else
             {
-                Debug.Log("Wrond enemy mode id, cant find mode in Enemy Modes list");
+                enemy.AddRange(m_enemyModes[0].m_enemys);// 1 is default mode
+                //Debug.Log("Wrond enemy mode id, cant find mode in Enemy Modes list");
             }
         }
 
@@ -475,7 +472,10 @@ public class GameControll : MonoBehaviour
     private void UpdateStats()
     {
         m_eyesPillsCountText.text = m_eyesCount.ToString();
-        player.m_enemySeePlayer = SomeEnemySeePlayer();
+        if(enemy.Count > 0)
+        {
+            player.m_enemySeePlayer = SomeEnemySeePlayer();
+        }
     }
 
     private bool SomeEnemySeePlayer()

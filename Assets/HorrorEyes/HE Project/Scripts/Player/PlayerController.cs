@@ -430,7 +430,32 @@ public class PlayerController : MonoBehaviour {
         AS.PlayOneShot(footSteps[r]);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.tag);
 
+        if (other.CompareTag("lockTrigger"))
+        {
+            other.gameObject.GetComponent<BoxCollider>().enabled = false;
+            foreach (Transform child in other.transform)
+            {
+                Debug.Log(child.name);
+
+                if (child.CompareTag("door"))
+                {
+                    foreach (Transform doorChild in child)
+                    {
+                        doorChild.GetComponentInChildren<AutomaticDoor>(true)?.Lock();
+                        Debug.Log(doorChild.name);
+                    }
+                }
+                else
+                {
+                    child.gameObject.SetActive(true); 
+                }
+            }
+        }
+    }
 }
 
 

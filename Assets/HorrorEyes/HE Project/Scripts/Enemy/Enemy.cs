@@ -86,22 +86,24 @@ public class Enemy : MonoBehaviour {
         {
             children[i] = wp.GetChild(i);
         }
-
-        wayPoints = children;
-        player = FindObjectOfType<PlayerController>();
-        AS = GetComponent<AudioSource>();
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        agent.speed = walkSpeed;
-        animator = GetComponent<Animator>();
-        lastSawPoint = Vector3.zero;
-        wpID = -1;
+        if(!GetComponent<NavMeshAgent>() == null)
+        {
+            wayPoints = children;
+            player = FindObjectOfType<PlayerController>();
+            AS = GetComponent<AudioSource>();
+            agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+            agent.speed = walkSpeed;
+            animator = GetComponent<Animator>();
+            lastSawPoint = Vector3.zero;
+            wpID = -1;
+        }
     }
 
     private void Update()
     {
      
 
-        if (killState == 0)
+        if (killState == 0 && agent != null)
         {
             UpdateMovement();
 
@@ -166,9 +168,12 @@ public class Enemy : MonoBehaviour {
 
     private void UpdateMovement()
     {
-        float speed = agent.velocity.magnitude;
-        Mathf.Clamp(speed,0,1);
-        animator.SetFloat("MoveSpeed",speed,0.2f, Time.deltaTime);
+        if (agent != null)
+        {
+            float speed = agent.velocity.magnitude;
+            Mathf.Clamp(speed,0,1);
+            animator.SetFloat("MoveSpeed",speed,0.2f, Time.deltaTime);
+        }
     }
 
     private void SearchInteractPoints()

@@ -40,7 +40,6 @@ public class AutomaticDoor : MonoBehaviour
 
     public void Unlock()
     {
-      
         if (m_unlockSound)
         {
             AudioSource.PlayClipAtPoint(m_unlockSound, transform.position);
@@ -48,46 +47,49 @@ public class AutomaticDoor : MonoBehaviour
         StartCoroutine(WaitForUnlock());
     }
 
+    public void Lock()
+    {
+        m_locked = true;
+        m_jamned = true;
+        m_triggersParent.SetActive(false);
+    }
+
     public void SetPower()
     {
-       m_needPower = false;
-       m_triggersParent.SetActive(true);
+        m_needPower = false;
+        m_triggersParent.SetActive(true);
     }
 
     public void ActorEnterOnTrigger(int triggerID)
     {
-        if (!m_locked)
+        if (m_locked || m_jamned || m_needPower)
+            return;
+
+        if (triggerID == 0)
         {
-
-
-            if (triggerID == 0)
+            if (m_state == 0)
             {
-                if (m_state == 0)
-                {
-                    AudioSource.PlayClipAtPoint(m_openSound, transform.position);
-                    m_doorAnimation.Play(m_open_A_Name);
-                    m_state = 1;
-                }
+                if (m_openSound) AudioSource.PlayClipAtPoint(m_openSound, transform.position);
+                m_doorAnimation.Play(m_open_A_Name);
+                m_state = 1;
             }
+        }
 
-            if (triggerID == 1)
+        if (triggerID == 1)
+        {
+            if (m_state == 0)
             {
-                if (m_state == 0)
-                {
-                    AudioSource.PlayClipAtPoint(m_openSound, transform.position);
-                    m_doorAnimation.Play(m_open_B_Name);
-                    m_state = 2;
-                }
+                if (m_openSound) AudioSource.PlayClipAtPoint(m_openSound, transform.position);
+                m_doorAnimation.Play(m_open_B_Name);
+                m_state = 2;
             }
         }
     }
 
     public void ActorExitTrigger(int triggerID)
     {
-        if (!m_locked)
+        if (!m_locked && !m_jamned)
         {
-
-
             if (!m_triggerA.m_actorOnTrigger && !m_triggerB.m_actorOnTrigger)
             {
                 if (m_state == 1)
@@ -113,6 +115,5 @@ public class AutomaticDoor : MonoBehaviour
         m_jamned = false;
         m_locked = false;
         m_triggersParent.SetActive(true);
-
     }
 }

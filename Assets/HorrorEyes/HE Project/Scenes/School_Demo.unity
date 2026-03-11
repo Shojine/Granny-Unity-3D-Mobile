@@ -12870,6 +12870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   sensitivity: 1
+  maxLookDelta: 25
   minPitch: -80
   maxPitch: 80
   gameManager: {fileID: 1191307063}
@@ -42315,6 +42316,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 477221616}
     - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: gamePlayer

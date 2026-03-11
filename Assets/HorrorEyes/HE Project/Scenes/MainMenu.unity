@@ -1302,6 +1302,13 @@ MonoBehaviour:
   m_collectedPicturesCountText: {fileID: 1912937761}
   m_loadingSceneName: LoadScene
   m_levels:
+  - name: Tutorial
+    m_sceneName: Tutorial
+    m_description: Level tutorial to understand the gameplay mechanics
+    m_levelShowGameobject: {fileID: 8724423987122817380}
+    m_lockByDefault: 1
+    m_lockState: 0
+    m_price: 0
   - name: Morgue
     m_sceneName: Morgue
     m_description: An abandoned hospital where the dead were never truly laid to
@@ -10875,7 +10882,7 @@ PrefabInstance:
     - target: {fileID: 1202749456181966545, guid: a184d3d1afdd5bd4bae9c41f7e209610,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1202749457420787307, guid: a184d3d1afdd5bd4bae9c41f7e209610,
         type: 3}
@@ -32276,7 +32283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8724423987122817381
 Transform:
   m_ObjectHideFlags: 0
