@@ -40322,6 +40322,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1644165989342418673, guid: d33478b9a9701c94eae3d12e39df3607,
+        type: 3}
+      propertyPath: m_Value
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644165989342418673, guid: d33478b9a9701c94eae3d12e39df3607,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1859234416002852977, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -40332,6 +40342,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
+        type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1646798167}
     - target: {fileID: 2001139095995051077, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: player
@@ -40602,6 +40617,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 1.2900391
       objectReference: {fileID: 0}
+    - target: {fileID: 4989007720041690469, guid: d33478b9a9701c94eae3d12e39df3607,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4993544877883275794, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -40707,6 +40727,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7115901458660130194, guid: d33478b9a9701c94eae3d12e39df3607,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00024414062
+      objectReference: {fileID: 0}
     - target: {fileID: 7163541821975045510, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
       propertyPath: m_IsActive
@@ -40796,6 +40821,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8127482807975171639, guid: d33478b9a9701c94eae3d12e39df3607,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1234953604}
+    - target: {fileID: 8127482807975171639, guid: d33478b9a9701c94eae3d12e39df3607,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ConfigureApply
+      objectReference: {fileID: 0}
+    - target: {fileID: 8127482807975171639, guid: d33478b9a9701c94eae3d12e39df3607,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameControll, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8128615191232946038, guid: d33478b9a9701c94eae3d12e39df3607,
         type: 3}
@@ -64194,6 +64234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   sensitivity: 1
+  maxLookDelta: 25
   minPitch: -80
   maxPitch: 80
   gameManager: {fileID: 1234953604}
@@ -64209,7 +64250,7 @@ MonoBehaviour:
   maxFlickerCount: 7
   maxFlickerInterval: 10
   flickerSmoothing: 5
-  accessability: 0
+  accessability: 1
 --- !u!114 &1646798168
 MonoBehaviour:
   m_ObjectHideFlags: 0

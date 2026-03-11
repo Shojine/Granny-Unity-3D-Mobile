@@ -17,14 +17,57 @@ public class Inventory : MonoBehaviour {
     [Header("UI Settings")]
     public Sprite m_emptySprite;
 
+    private int m_currentSlot = 0;
+
+    private int selectedItemID = -1;
 
     private void Awake()
     {
         m_gameControll = GetComponent<GameControll>();
         m_itemsDatabase = GetComponent<ItemsDatabase>();
-       
     }
 
+    private void Update()
+    {
+        if (!m_gameControll.m_mobileTouchInput)
+        {
+            PCSelection();
+        }
+    }
+
+    public int GetSelectedItemID()
+    {
+        if (selectedItemID != -1)
+        {
+            return m_slots[selectedItemID].m_itemID;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
+    private void PCSelection()
+    {
+        float scroll = Input.mouseScrollDelta.y;
+        if (scroll > 0) ChangeSelectedSlot(-1);
+        if (scroll < 0) ChangeSelectedSlot(1);
+    }
+
+    private void ChangeSelectedSlot(int direction)
+    {
+        m_currentSlot += direction;
+        if (m_currentSlot < 0)
+        {
+            m_currentSlot = m_slots.Count - 1;
+        }
+        else if (m_currentSlot >= m_slots.Count)
+        {
+            m_currentSlot = 0;
+        }
+        selectedItemID = m_currentSlot;
+        ValidateSelection();
+    }
 
     public void AddItem (int id, int cnt)
     {
@@ -37,7 +80,6 @@ public class Inventory : MonoBehaviour {
             {
                 m_slots[same].m_itemCount += cnt;
                 PrepareSlot(m_slots[same]);
-
             }
             else
             {
@@ -61,8 +103,31 @@ public class Inventory : MonoBehaviour {
                 m_gameControll.AddEyePills(1);
             }
         }
+        ValidateSelection();
     }
 
+private void ValidateSelection()
+{
+    if (m_slots.Count == 0) selectedItemID = -1;
+    else if (selectedItemID >= m_slots.Count) selectedItemID = m_slots.Count - 1;
+    else if (selectedItemID == -1) selectedItemID = 0;
+    RefreshSelectedVisual();
+}
+
+private void RefreshSelectedVisual()
+    {
+        for (int i = 0; i < m_slots.Count; i++)
+        {
+            if (i == selectedItemID)
+            {
+                m_slots[i].m_icon.color = Color.green;
+            }
+            else
+            {
+                m_slots[i].m_icon.color = Color.white;
+            }
+        }
+    }
 
 
     public void RemoveItem(int itemID, int removeCount)
@@ -77,14 +142,13 @@ public class Inventory : MonoBehaviour {
             if(m_slots[same].m_itemCount <= 0)
             {
                 Destroy(m_slots[same].gameObject);
-                m_slots.RemoveAt(same);        
+                m_slots.RemoveAt(same);
             }else
             {
                 PrepareSlot(m_slots[same]);
             }
         }
-
-
+        ValidateSelection();
     }
 
 

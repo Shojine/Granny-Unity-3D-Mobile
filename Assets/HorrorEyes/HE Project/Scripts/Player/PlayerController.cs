@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour {
     public string cameraIdleAnimName;
     [Tooltip("Camera move animation name")]
     public string cameraMoveAnimName;
+    string currentCameraAnimationName;
 
 
     [Header("CrouchSettings")]  
@@ -116,7 +117,7 @@ public class PlayerController : MonoBehaviour {
         PlayerStates();
         if (!locked && !lockedByDying)
         {
-            CameraRotation();       
+            // CameraRotation();
             Movement();
             Controll();
             Stamina();
@@ -314,16 +315,35 @@ public class PlayerController : MonoBehaviour {
         if (characterController.velocity.magnitude > 0.5f)
         {
             playerMoving = true;
-            cameraAnimation.Play(cameraMoveAnimName);
-            cameraAnimation[cameraMoveAnimName].speed = characterController.velocity.magnitude / 3;       
+            SwitchCameraAnimation(cameraMoveAnimName);
+            if (cameraAnimation != null && cameraAnimation[cameraMoveAnimName] != null)
+            {
+                cameraAnimation[cameraMoveAnimName].speed = characterController.velocity.magnitude / 3;
+            }
         }
         else
         {
             playerMoving = false;
-            cameraAnimation.Play(cameraIdleAnimName);         
+            SwitchCameraAnimation(cameraIdleAnimName);
         }
 
 
+    }
+
+    private void SwitchCameraAnimation(string animationName)
+    {
+        if (cameraAnimation == null || string.IsNullOrEmpty(animationName))
+        {
+            return;
+        }
+
+        if (currentCameraAnimationName == animationName && cameraAnimation.IsPlaying(animationName))
+        {
+            return;
+        }
+
+        cameraAnimation.CrossFade(animationName);
+        currentCameraAnimationName = animationName;
     }
 
     private void CameraRotation()

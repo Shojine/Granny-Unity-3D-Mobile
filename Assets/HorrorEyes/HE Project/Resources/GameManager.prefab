@@ -4811,6 +4811,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 24c74abb6acb0e54d944b4c28153794f, type: 3}
   m_printSpaceSound: {fileID: 8300000, guid: e6026c81029d64f478c61834aae6de6f, type: 3}
   pauseVolume: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!114 &6321848369223728016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7158,9 +7159,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8540900409606063928}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 400
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 236
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

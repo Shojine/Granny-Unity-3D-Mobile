@@ -93,6 +93,7 @@ public class GameControll : MonoBehaviour
 
     [Header("Added Settings")]
     public GameObject pauseVolume;
+    public CameraController cam;
 
 
 
@@ -159,13 +160,16 @@ public class GameControll : MonoBehaviour
 
         if (PlayerPrefs.HasKey("Sensitivity"))
         {
-            player.mouseSensetivity = PlayerPrefs.GetFloat("Sensitivity");
+            float normalized = sensitivitySlider.value;
+            PlayerPrefs.SetFloat("Sensitivity", normalized);
+            cam.sensitivity = Mathf.Lerp(0.1f, 10f, normalized);
             sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
         }
         else
         {
-            sensitivitySlider.value = sensitivitySlider.maxValue / 2f;
-            player.mouseSensetivity = sensitivitySlider.value;
+            float normalized = sensitivitySlider.value;
+            PlayerPrefs.SetFloat("Sensitivity", normalized);
+            cam.sensitivity = Mathf.Lerp(0.1f, 10f, normalized);
         }
 
         if (PlayerPrefs.HasKey("EnemyMode"))
@@ -904,10 +908,10 @@ public class GameControll : MonoBehaviour
     public void ConfigureApply()
     {
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
-        PlayerPrefs.SetFloat("Sensitivity", sensitivitySlider.value);
+        float normalized = sensitivitySlider.value;
+        PlayerPrefs.SetFloat("Sensitivity", normalized);
+        cam.sensitivity = Mathf.Lerp(0.1f, 10f, normalized);
         AudioListener.volume = PlayerPrefs.GetFloat("Volume");
-        player.mouseSensetivity = PlayerPrefs.GetFloat("Sensitivity");
-
     }
 
 

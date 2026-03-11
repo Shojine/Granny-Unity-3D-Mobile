@@ -36,6 +36,8 @@ public class Interact : MonoBehaviour {
     [Header("Examine Settings")]
     public GameObject m_examine_camera;
 
+
+
     private void Start()
     {
         m_gameController = FindFirstObjectByType<GameControll>();
@@ -49,7 +51,7 @@ public class Interact : MonoBehaviour {
 
             if (!m_gameController.m_mobileTouchInput)
             {
-                if (CrossPlatformInputManager.GetButtonDown("Interact"))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     if (EventSystem.current.IsPointerOverGameObject())    // is the touch on the GUI
                     {
@@ -61,7 +63,8 @@ public class Interact : MonoBehaviour {
                     {
                         if (hot.transform.gameObject.tag == interactTag)
                         {
-                            CheckRaycastedObject(hot.transform.gameObject,-1);
+                            int selectedItemID = m_gameController.inventory.GetSelectedItemID();
+                            CheckRaycastedObject(hot.transform.gameObject, selectedItemID);
                         }
                     }
                 }
