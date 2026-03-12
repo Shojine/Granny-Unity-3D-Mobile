@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour {
     public Slider volumeSlider;
     [Tooltip("Slider to controll sensitivity")]
     public Slider sensitivitySlider;
+    public Toggle m_accessabilityToggle;
     public GameObject m_lockImageGameObject;
     public Button m_playButton;
     public GameObject m_startGameWindow;
@@ -368,6 +369,7 @@ public class MainMenu : MonoBehaviour {
     {
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
         PlayerPrefs.SetFloat("Sensitivity", sensitivitySlider.value);
+        PlayerPrefs.SetInt("Accessability", m_accessabilityToggle.isOn ? 1 : 0);
         AudioListener.volume = PlayerPrefs.GetFloat("Volume");
      
     }

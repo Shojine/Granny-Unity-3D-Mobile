@@ -58,6 +58,7 @@ public class GameControll : MonoBehaviour
     public GameObject gameWinPanel;
     public Slider volumeSlider;
     public Slider sensitivitySlider;
+    public Toggle m_accessabilityToggle;
 
     [Header("Tips Settings")]
     [Tooltip("Tips")]
@@ -160,11 +161,23 @@ public class GameControll : MonoBehaviour
         }
         else
         {
-            normalized = 0.5f; PlayerPrefs.SetFloat("Sensitivity", normalized);
+            normalized = 0.5f;
+            PlayerPrefs.SetFloat("Sensitivity", normalized);
         }
-        
+
         sensitivitySlider.value = normalized;
         cam.sensitivity = Mathf.Lerp(0.1f, 10f, normalized);
+
+        if(PlayerPrefs.HasKey("Accessability"))
+        {
+            m_accessabilityToggle.isOn = PlayerPrefs.GetInt("Accessability") == 1;
+            cam.accessability = m_accessabilityToggle.isOn;
+        }else
+        {
+            m_accessabilityToggle.isOn = false;
+            PlayerPrefs.SetInt("Accessability", m_accessabilityToggle.isOn ? 1 : 0);
+            cam.accessability = m_accessabilityToggle.isOn;
+        }
 
         if (PlayerPrefs.HasKey("EnemyMode"))
         {
@@ -238,7 +251,6 @@ public class GameControll : MonoBehaviour
                     m_gameHadrnesMultip = m_difficultyModes[diffId].m_XP_Multiplayer;
                 }
             }
-         
         }
     }
 
@@ -912,6 +924,8 @@ public class GameControll : MonoBehaviour
         PlayerPrefs.SetFloat("Sensitivity", normalized);
         cam.sensitivity = Mathf.Lerp(0.1f, 10f, normalized);
         AudioListener.volume = PlayerPrefs.GetFloat("Volume");
+        PlayerPrefs.SetInt("Accessability", m_accessabilityToggle.isOn ? 1 : 0);
+        cam.accessability = m_accessabilityToggle.isOn;
     }
 
 
