@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
+using static UnityEngine.Timeline.DirectorControlPlayable;
 
 
 public class PlayerController : MonoBehaviour {

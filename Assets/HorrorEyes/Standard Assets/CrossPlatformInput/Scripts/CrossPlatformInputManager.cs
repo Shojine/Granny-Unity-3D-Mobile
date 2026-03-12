@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput.PlatformSpecific;
+using UnityEngine.InputSystem;
+using UnityEditor;
 
 namespace UnityStandardAssets.CrossPlatformInput
 {
@@ -18,8 +20,80 @@ namespace UnityStandardAssets.CrossPlatformInput
 		private static VirtualInput s_TouchInput;
 		private static VirtualInput s_HardwareInput;
 
+        public static PlayerController playerController;
+        public static GameControll gameControl;
 
-		static CrossPlatformInputManager()
+        private static InputAction MoveAction;
+        private static InputAction InteractAction;
+        private static InputAction CrouchAction;
+        private static InputAction SprintAction;
+        private static InputAction ScrollInventoryAction;
+        private static InputAction PauseAction;
+        private static InputAction SkipAction;
+        private static InputAction FlashlightAction;
+
+        static void Start()
+        {
+            MoveAction = InputSystem.actions.FindAction("Movement");
+            InteractAction = InputSystem.actions.FindAction("Interact");
+            CrouchAction = InputSystem.actions.FindAction("Crouch");
+            SprintAction = InputSystem.actions.FindAction("Sprint");
+            ScrollInventoryAction = InputSystem.actions.FindAction("InventoryScroll");
+            PauseAction = InputSystem.actions.FindAction("Pause");
+            SkipAction = InputSystem.actions.FindAction("Skip");
+            FlashlightAction = InputSystem.actions.FindAction("Flashlight");
+
+            InteractAction.performed += OnInteract;
+            CrouchAction.performed += OnCrouch;
+            SprintAction.performed += OnSprintStarted;
+            SprintAction.canceled += OnSprintCanceled;
+            ScrollInventoryAction.performed += OnScroll;
+            PauseAction.performed += OnPause;
+            SkipAction.performed += OnSkip;
+            FlashlightAction.performed += OnFlashlight;
+
+        }
+        private static void OnInteract(InputAction.CallbackContext ctx)
+        {
+
+        }
+
+        private static void OnCrouch(InputAction.CallbackContext ctx)
+        {
+            playerController.SetCrouch();
+        }
+
+        private static void OnSprintStarted(InputAction.CallbackContext ctx)
+        {
+            playerController.m_running = true;
+        }
+
+        private static void OnSprintCanceled(InputAction.CallbackContext ctx)
+        {
+            playerController.m_running = false;
+        }
+
+        private static void OnScroll(InputAction.CallbackContext ctx)
+        {
+
+        }
+
+        private static void OnPause(InputAction.CallbackContext ctx)
+        {
+            gameControl.PauseGame();
+        }
+
+        private static void OnSkip(InputAction.CallbackContext ctx)
+        {
+            gameControl.SkipCutscene();
+        }
+
+        private static void OnFlashlight(InputAction.CallbackContext ctx)
+        {
+
+        }
+
+        static CrossPlatformInputManager()
 		{
 			s_TouchInput = new MobileInput();
 			s_HardwareInput = new StandaloneInput();
@@ -30,7 +104,9 @@ namespace UnityStandardAssets.CrossPlatformInput
 #endif
 		}
 
-		public static void SwitchActiveInputMethod(ActiveInputMethod activeInputMethod)
+        #region 
+
+        public static void SwitchActiveInputMethod(ActiveInputMethod activeInputMethod)
 		{
 			switch (activeInputMethod)
 			{
@@ -314,5 +390,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 				}
 			}
 		}
+
+        #endregion
+	
 	}
 }

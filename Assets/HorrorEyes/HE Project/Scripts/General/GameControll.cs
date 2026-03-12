@@ -292,6 +292,15 @@ public class GameControll : MonoBehaviour
                
             }else
             {
+                if (CrossPlatformInputManager.GetButton("Interact"))
+                    {
+                        StartCoroutine(WaitCharPrintTime(0.0f));
+                    }
+                    else
+                    {
+                        StartCoroutine(WaitCharPrintTime(m_printSpeed));
+                    }
+
                 if (m_mobileTouchInput)
                 {
 
@@ -306,23 +315,7 @@ public class GameControll : MonoBehaviour
                     }
 
                     StartCoroutine(WaitCharPrintTime(m_printSpeed));
-
-
                 }
-                else
-                {
-
-                    if (CrossPlatformInputManager.GetButton("Interact"))
-                    {
-                        StartCoroutine(WaitCharPrintTime(0.0f));
-                    }
-                    else
-                    {
-                        StartCoroutine(WaitCharPrintTime(m_printSpeed));
-                    }
-
-                }
-
 
             }
         }
@@ -652,6 +645,8 @@ public class GameControll : MonoBehaviour
             {
                if (!player.lockedByDying)
                {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 pause = true;
                 pausePanel.SetActive(pause);
                 Time.timeScale = 0.0f;
