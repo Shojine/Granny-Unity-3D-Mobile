@@ -86,7 +86,9 @@ public class Enemy : MonoBehaviour {
         {
             children[i] = wp.GetChild(i);
         }
-        if(!GetComponent<NavMeshAgent>() == null)
+        // make sure the enemy actually has a NavMeshAgent before trying to use it
+        // previous code used a faulty null-check that prevented initialization entirely
+        if (GetComponent<NavMeshAgent>() != null)
         {
             wayPoints = children;
             player = FindObjectOfType<PlayerController>();
@@ -96,6 +98,10 @@ public class Enemy : MonoBehaviour {
             animator = GetComponent<Animator>();
             lastSawPoint = Vector3.zero;
             wpID = -1;
+        }
+        else
+        {
+            Debug.LogWarning("Enemy on " + gameObject.name + " has no NavMeshAgent component - AI will remain inactive.");
         }
     }
 

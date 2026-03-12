@@ -191,7 +191,7 @@ public class GameControll : MonoBehaviour
            
             }else
             {
-                enemy.AddRange(m_enemyModes[0].m_enemys);// 1 is default mode
+                // 1 is default mode
                 //Debug.Log("Wrond enemy mode id, cant find mode in Enemy Modes list");
             }
             
@@ -208,7 +208,7 @@ public class GameControll : MonoBehaviour
             }
             else
             {
-                enemy.AddRange(m_enemyModes[0].m_enemys);// 1 is default mode
+                //enemy.AddRange(m_enemyModes[0].m_enemys);// 1 is default mode
                 //Debug.Log("Wrond enemy mode id, cant find mode in Enemy Modes list");
             }
         }
