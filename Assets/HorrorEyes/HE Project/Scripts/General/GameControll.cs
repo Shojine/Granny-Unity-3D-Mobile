@@ -153,19 +153,18 @@ public class GameControll : MonoBehaviour
             volumeSlider.value = 1f;
         }
 
+        float normalized;
         if (PlayerPrefs.HasKey("Sensitivity"))
         {
-            float normalized = sensitivitySlider.value;
-            PlayerPrefs.SetFloat("Sensitivity", normalized);
-            cam.sensitivity = Mathf.Lerp(0.1f, 10f, normalized);
-            sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
+            normalized = PlayerPrefs.GetFloat("Sensitivity");
         }
         else
         {
-            float normalized = sensitivitySlider.value;
-            PlayerPrefs.SetFloat("Sensitivity", normalized);
-            cam.sensitivity = Mathf.Lerp(0.1f, 10f, normalized);
+            normalized = 0.5f; PlayerPrefs.SetFloat("Sensitivity", normalized);
         }
+        
+        sensitivitySlider.value = normalized;
+        cam.sensitivity = Mathf.Lerp(0.1f, 10f, normalized);
 
         if (PlayerPrefs.HasKey("EnemyMode"))
         {
@@ -907,8 +906,9 @@ public class GameControll : MonoBehaviour
 
     public void ConfigureApply()
     {
+        Debug.Log(cam.sensitivity);
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
-        float normalized = sensitivitySlider.value;
+        float normalized = sensitivitySlider.value / 10f;
         PlayerPrefs.SetFloat("Sensitivity", normalized);
         cam.sensitivity = Mathf.Lerp(0.1f, 10f, normalized);
         AudioListener.volume = PlayerPrefs.GetFloat("Volume");

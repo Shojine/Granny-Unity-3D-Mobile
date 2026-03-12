@@ -111,8 +111,8 @@ public class CameraController : MonoBehaviour
 
         currentVelocity = Vector2.Lerp(currentVelocity, rawLookInput, acceleration * Time.deltaTime);
 
-        rotation.x -= currentVelocity.y * (sensitivity * 0.07f);
-        rotation.y += currentVelocity.x * (sensitivity * 0.07f);
+        rotation.x -= currentVelocity.y * (sensitivity * 0.5f);
+        rotation.y += currentVelocity.x * (sensitivity * 0.5f);
         rotation.x = Mathf.Clamp(rotation.x, minPitch, maxPitch);
 
         transform.rotation = Quaternion.Euler(rotation);
@@ -121,14 +121,14 @@ public class CameraController : MonoBehaviour
         {
             flashlightVelocity = Vector2.Lerp(flashlightVelocity, rawLookInput, flashlightAcceleration * Time.deltaTime);
 
-            flashlightRotation.x -= flashlightVelocity.y * (sensitivity * 0.07f);
-            flashlightRotation.y += flashlightVelocity.x * (sensitivity * 0.07f);
+            flashlightRotation.x -= flashlightVelocity.y * (sensitivity * 0.5f);
+            flashlightRotation.y += flashlightVelocity.x * (sensitivity * 0.5f);
             flashlightRotation.x = Mathf.Clamp(flashlightRotation.x, minPitch, maxPitch);
 
             if (Input.GetKey(KeyCode.F))
             {
-                flashlightRotation.y = Mathf.Lerp(flashlightRotation.y, rotation.y, 0.1f);
-                flashlightRotation.x = Mathf.Lerp(flashlightRotation.x, rotation.x, 0.1f);
+                flashlightRotation.y = Mathf.Lerp(flashlightRotation.y, rotation.y, 0.01f);
+                flashlightRotation.x = Mathf.Lerp(flashlightRotation.x, rotation.x, 0.01f);
             }
 
             hand.rotation = Quaternion.Euler(flashlightRotation);
