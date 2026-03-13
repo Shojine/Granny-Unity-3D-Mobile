@@ -179,38 +179,65 @@ public class GameControll : MonoBehaviour
             cam.accessability = m_accessabilityToggle.isOn;
         }
 
-        if (PlayerPrefs.HasKey("EnemyMode"))
+        // pick enemies based on the saved mode; if modes list is empty or id not found, fall back to every enemy in the scene
+        enemy.Clear();
+        if (m_enemyModes == null || m_enemyModes.Count == 0)
+        {
+            // no modes defined at all – just grab whatever exists
+            Enemy[] enm = FindObjectsOfType<Enemy>();
+            enemy.AddRange(enm);
+        }
+        else if (PlayerPrefs.HasKey("EnemyMode"))
         {
             int EM = PlayerPrefs.GetInt("EnemyMode");
-
             int i = GetEnemyModeById(EM);
-
-            if(i != -1)
-            {
-                enemy.AddRange(m_enemyModes[i].m_enemys);
-           
-            }else
-            {
-                // 1 is default mode
-                //Debug.Log("Wrond enemy mode id, cant find mode in Enemy Modes list");
-            }
-            
-        }else
-        {
-            int EM = 0;
-
-            int i = GetEnemyModeById(EM);
-
             if (i != -1)
             {
                 enemy.AddRange(m_enemyModes[i].m_enemys);
-
             }
             else
             {
-                //enemy.AddRange(m_enemyModes[0].m_enemys);// 1 is default mode
-                //Debug.Log("Wrond enemy mode id, cant find mode in Enemy Modes list");
+                // id invalid, keep default mode if there is one, otherwise grab all
+                if (m_enemyModes.Count > 0)
+                    enemy.AddRange(m_enemyModes[0].m_enemys);
+                else
+                {
+                    Enemy[] enm = FindObjectsOfType<Enemy>();
+                    enemy.AddRange(enm);
+                }
             }
+        }
+        else
+        {
+            // no preference saved, use first mode or fallback
+            int EM = 0;
+            int i = GetEnemyModeById(EM);
+            if (i != -1)
+            {
+                enemy.AddRange(m_enemyModes[i].m_enemys);
+            }
+            else if (m_enemyModes.Count > 0)
+            {
+                enemy.AddRange(m_enemyModes[0].m_enemys);
+            }
+            else
+            {
+                Enemy[] enm = FindObjectsOfType<Enemy>();
+                enemy.AddRange(enm);
+            }
+        }
+
+        // ensure everything we're about to use is active
+        if (enemy.Count == 0)
+        {
+            // still zero? try full-scene grab
+            Enemy[] enm = FindObjectsOfType<Enemy>();
+            enemy.AddRange(enm);
+        }
+        for (int j = 0; j < enemy.Count; j++)
+        {
+            if (enemy[j] != null)
+                enemy[j].gameObject.SetActive(true);
         }
 
 
